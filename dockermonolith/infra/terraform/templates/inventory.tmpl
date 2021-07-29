@@ -1,0 +1,4 @@
+[app]
+%{ for addr in hostname_app ~}
+${addr}
+%{ endfor ~}

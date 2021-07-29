@@ -1,0 +1,14 @@
+dockermonolith git:(docker-2) ✗ docker images
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+devopstank/otus-reddit   1.0                 6dfb44946f4d        22 minutes ago      695MB
+reddit                   latest              6dfb44946f4d        22 minutes ago      695MB
+<none>                   <none>              569c007437d0        51 minutes ago      694MB
+<none>                   <none>              e51569973708        About an hour ago   646MB
+<none>                   <none>              ce2c64323b66        4 hours ago         646MB
+ubuntu                   16.04               38b3fa4640d4        35 hours ago        135MB
+ubuntu                   latest              1318b700e415        35 hours ago        72.8MB
+ubuntu                   18.04               39a8cfeef173        35 hours ago        63.1MB
+tehbilly/htop            latest              4acd2b4de755        3 years ago         6.91MB
+
+Image - это снимок системы, который сотоит из слоев.
+Container - это запущенный image, под который выделили ресурсы для запуска и выставили ограничения.

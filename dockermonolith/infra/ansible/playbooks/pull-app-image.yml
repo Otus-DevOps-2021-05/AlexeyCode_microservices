@@ -1,0 +1,17 @@
+---
+- name: Download and run app image
+  hosts: app
+  become: true
+  tasks:
+    - name: Download docker image
+      docker_image:
+        name: devopstank/otus-reddit:1.0
+
+    - name: Start an app container
+      docker_container:
+        name: otus-reddit
+        image: devopstank/otus-reddit:1.0
+        detach: yes
+        ports:
+          - "9292:9292"
+        state: started
