@@ -14,7 +14,7 @@ provider "yandex" {
 
 resource "yandex_compute_instance" "app" {
   name  = "reddit-app-${count.index}"
-  count = 2
+  count = var.instance_count
 
   labels = {
     tags = "reddit-app"

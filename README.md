@@ -12,3 +12,7 @@ AlexeyCode microservices repository
 - написаны скрипты terraform которые поднимают количество VM которое заданов переменной  ```count```
 - написан terraform template который формирует inventory для ansible
 - написаны скрипты для ansible которые устанавливают docker и запускают приложение otus-reddit на нем
+
+#ДЗ№15
+- написаны Dockerfile для модулей post, comment, ui
+- оптимизировн Dockerfile для модуля ui
