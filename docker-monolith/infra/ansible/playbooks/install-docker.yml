@@ -18,5 +18,6 @@
 
     - name: Install ansible module for docker
       pip:
-        name: docker
-        executable: pip3
+        name:
+          - docker
+          - python-gitlab
