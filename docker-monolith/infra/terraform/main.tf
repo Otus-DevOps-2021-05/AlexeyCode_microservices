@@ -21,12 +21,13 @@ resource "yandex_compute_instance" "app" {
   }
   resources {
     cores  = 2
-    memory = 2
+    memory = 4
   }
 
   boot_disk {
     initialize_params {
       image_id = var.app_disk_image
+      size = 50
     }
   }
 
