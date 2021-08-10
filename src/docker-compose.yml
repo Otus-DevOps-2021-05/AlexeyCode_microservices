@@ -1,0 +1,88 @@
+version: '3.3'
+services:
+  post_db:
+    image: mongo:3.2
+    volumes:
+      - post_db:/data/db
+    networks:
+      - reddit
+  ui:
+    build: ./ui
+    image: $USER_NAME/ui:latest
+    ports:
+      - 9292:9292/tcp
+    networks:
+      - reddit
+  post:
+    build: ./post-py
+    image: $USER_NAME/post:latest
+    networks:
+      - reddit
+  comment:
+    build: ./comment
+    image: $USER_NAME/comment:latest
+    networks:
+      - reddit
+
+  prometheus:
+    build: ../monitoring/prometheus
+    image: $USER_NAME/prometheus:latest
+    ports:
+      - '9090:9090'
+    volumes:
+      - prometheus_data:/prometheus
+    command: # Передаем доп параметры в командной строке
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention=1d' # Задаем время хранения метрик в 1 день
+    networks:
+      - reddit
+
+  node-exporter:
+    image: prom/node-exporter:v0.15.2
+    user: root
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
+    networks:
+      - reddit
+
+  black-box-exporter:
+    build: ../monitoring/blackbox-exporter
+    image: $USER_NAME/blackbox_exporter:latest
+    ports:
+      - '9115:9115'
+    command: # Передаем доп параметры в командной строке
+      - '--config.file=/config/blackbox.yml'
+    networks:
+      - reddit
+
+  cloudprober:
+    build: ../monitoring/cloudprober
+    image: $USER_NAME/cloudprober:latest
+    ports:
+      - '9313:9313'
+    networks:
+      - reddit
+
+  mongodb-exporter:
+    image: bitnami/mongodb-exporter:latest
+    ports:
+      - '9216:9216'
+    command:
+      - '--mongodb.uri=mongodb://post_db:27017'
+    networks:
+      - reddit
+
+
+volumes:
+  post_db:
+  prometheus_data:
+
+networks:
+  reddit:

@@ -16,3 +16,11 @@ AlexeyCode microservices repository
 #ДЗ№15
 - написаны Dockerfile для модулей post, comment, ui
 - оптимизировн Dockerfile для модуля ui
+
+#ДЗ№22
+Ссылки на образы
+docker.io/devopstank/comment
+docker.io/devopstank/ui
+docker.io/devopstank/post
+docker.io/devopstank/prometheus
+docker.io/devopstank/blackbox_exporter
