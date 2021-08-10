@@ -7,19 +7,19 @@ services:
     networks:
       - reddit
   ui:
-    build: ./ui
+    build: ../src/ui
     image: $USER_NAME/ui:latest
     ports:
       - 9292:9292/tcp
     networks:
       - reddit
   post:
-    build: ./post-py
+    build: ../src/post-py
     image: $USER_NAME/post:latest
     networks:
       - reddit
   comment:
-    build: ./comment
+    build: ../src/comment
     image: $USER_NAME/comment:latest
     networks:
       - reddit
