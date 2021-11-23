@@ -8,19 +8,37 @@ services:
       - reddit
   ui:
     build: ../src/ui
-    image: $USER_NAME/ui:latest
+    image: $USER_NAME/ui:logging
     ports:
       - 9292:9292/tcp
     networks:
       - reddit
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: service.ui
   post:
     build: ../src/post-py
-    image: $USER_NAME/post:latest
+    image: $USER_NAME/post:logging
     networks:
       - reddit
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
+    depends_on:
+      - post_db
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: service.post
   comment:
     build: ../src/comment
-    image: $USER_NAME/comment:latest
+    image: $USER_NAME/comment:logging
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
     networks:
       - reddit
 
@@ -62,13 +80,13 @@ services:
     networks:
       - reddit
 
-  cloudprober:
-    build: ../monitoring/cloudprober
-    image: $USER_NAME/cloudprober:latest
-    ports:
-      - '9313:9313'
-    networks:
-      - reddit
+#  cloudprober:
+#    build: ../monitoring/cloudprober
+#    image: $USER_NAME/cloudprober:latest
+#    ports:
+#      - '9313:9313'
+#    networks:
+#      - reddit
 
   mongodb-exporter:
     image: bitnami/mongodb-exporter:latest

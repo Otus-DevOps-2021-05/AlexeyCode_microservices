@@ -28,10 +28,10 @@ scrape_configs:
       - targets:
         - 'post:5000'
 
-  - job_name: 'cloudprober'
-    scrape_interval: 10s
-    static_configs:
-      - targets: ['178.154.204.226:9313']
+#  - job_name: 'cloudprober'
+#    scrape_interval: 10s
+#    static_configs:
+#      - targets: ['178.154.204.226:9313']
 
   - job_name: 'mongodb-exporter'
     static_configs:
@@ -53,4 +53,4 @@ scrape_configs:
       - source_labels: [__param_target]
         target_label: instance
       - target_label: __address__
-        replacement: 178.154.204.226:9115  # The blackbox exporter's real hostname:port.
+        replacement: localhost:9115  # The blackbox exporter's real hostname:port.

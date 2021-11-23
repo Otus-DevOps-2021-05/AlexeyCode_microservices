@@ -24,3 +24,8 @@ docker.io/devopstank/ui
 docker.io/devopstank/post
 docker.io/devopstank/prometheus
 docker.io/devopstank/blackbox_exporter
+
+#ДЗ№25
+- В docker-compose.yml добавлено логирование fluentd и трейсинг zipkin
+- Добавлен docker-compose-logging.yml для поднятия EFK стека
+- Доработан Makefile для сборки fluend
