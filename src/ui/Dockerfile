@@ -1,7 +1,7 @@
 FROM alpine
 RUN apk update \
   && apk add ruby-full ruby-dev build-base \
-  && gem install bundler:2.2.32 --no-doc
+  && gem install bundler:1.17.2 --no-doc
 
 ENV APP_HOME /app
 
