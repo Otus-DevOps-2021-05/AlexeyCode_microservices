@@ -1,0 +1,10 @@
+---
+service:
+  internalPort: 9292
+  externalPort: 9292
+
+image:
+  repository: devopstank/comment
+  tag: latest
+
+databaseHost: post-db
