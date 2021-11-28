@@ -27,4 +27,3 @@ spec:
           env:
             - name: POST_DATABASE_HOST
               value: comment-db
-          
