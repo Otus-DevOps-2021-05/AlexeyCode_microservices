@@ -1,7 +1,7 @@
-FROM alpine
-RUN apk update \
-  && apk add ruby-full ruby-dev build-base \
-  && gem install bundler:1.17.2 --no-doc
+FROM ubuntu:16.04
+RUN apt-get update \
+    && apt-get install -y ruby-full ruby-dev build-essential \
+    && gem install bundler --no-ri --no-rdoc
 
 ENV APP_HOME /app
 
