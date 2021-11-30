@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongo
+  name: mongo-deployment
 spec:
   replicas: 1
   selector:
@@ -9,7 +9,7 @@ spec:
       app: mongo
   template:
     metadata:
-      name: mongo
+      name: mongo-deployment
       labels:
         app: mongo
     spec:
